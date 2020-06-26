@@ -121,7 +121,7 @@ while True:
     data = {"subject": subject, "data": GANN_instance, "best_solution_idx": best_sol_idx}
     data_byte = pickle.dumps(data)
     
-    print("Sending Data to the Server.\n")
+    print("Sending the Model to the Server.\n")
     soc.sendall(data_byte)
     
     print("Receiving Reply from the Server.")
@@ -133,7 +133,7 @@ while True:
         break
     else:
         print(received_data, end="\n\n")
-    
+
     subject = received_data["subject"]
     if subject == "model":
         GANN_instance = received_data["data"]

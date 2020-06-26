@@ -30,7 +30,6 @@ def callback_generation(ga_instance):
 
 last_fitness = 0
 
-
 def prepare_GA(GANN_instance):
     # population does not hold the numerical weights of the network instead it holds a list of references to each last layer of each network (i.e. solution) in the population. A solution or a network can be used interchangeably.
     # If there is a population with 3 solutions (i.e. networks), then the population is a list with 3 elements. Each element is a reference to the last layer of each network. Using such a reference, all details of the network can be accessed.
@@ -74,12 +73,12 @@ def prepare_GA(GANN_instance):
     return ga_instance
 
 # Preparing the NumPy array of the inputs.
-data_inputs = numpy.array([[1, 1],
-                           [1, 0]])
+data_inputs = numpy.array([[1, 0],
+                           [1, 1]])
 
 # Preparing the NumPy array of the outputs.
-data_outputs = numpy.array([0, 
-                            1])
+data_outputs = numpy.array([1, 
+                            0])
 
 def recv(soc, buffer_size=1024, recv_timeout=10):
     received_data = b""
@@ -122,7 +121,7 @@ while True:
     data = {"subject": subject, "data": GANN_instance, "best_solution_idx": best_sol_idx}
     data_byte = pickle.dumps(data)
     
-    print("Sending Data to the Server.\n")
+    print("Sending the Model to the Server.\n")
     soc.sendall(data_byte)
     
     print("Receiving Reply from the Server.")
@@ -153,6 +152,8 @@ while True:
 
     subject = "model"
     best_sol_idx = ga_instance.best_solution()[2]
+
+# predictions = pygad.nn.predict(last_layer=GANN_instance.population_networks[best_sol_idx], data_inputs=data_inputs)
 
 soc.close()
 print("Socket Closed.\n")

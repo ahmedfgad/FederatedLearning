@@ -109,6 +109,16 @@ class SocketThread(threading.Thread):
                         if model is None:
                             model = best_model
                         else:
+                            predictions = pygad.nn.predict(last_layer=model, data_inputs=data_inputs)
+    
+                            error = numpy.sum(numpy.abs(predictions - data_outputs))
+    
+                            # In case a client sent a model to the server despite that the model error is 0.0. In this case, no need to make changes in the model.
+                            if error == 0:
+                                data = {"subject": "done", "data": None}
+                                response = pickle.dumps(data)
+                                return
+
                             self.model_averaging(model, best_model)
 
                         # print(best_model.trained_weights)
