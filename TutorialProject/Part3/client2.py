@@ -106,12 +106,11 @@ print("Socket Created.\n")
 
 try:
     soc.connect(("localhost", 10000))
+    print("Successful Connection to the Server.\n")
 except BaseException as e:
     print("Error Connecting to the Server: {msg}".format(msg=e))
     soc.close()
     print("Socket Closed.")
-
-print("Successful Connection to the Server.\n")
 
 subject = "echo"
 GANN_instance = None

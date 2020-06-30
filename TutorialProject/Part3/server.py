@@ -95,11 +95,21 @@ class SocketThread(threading.Thread):
 
                 print("Replying to the Client.")
                 if subject == "echo":
-                    try:
+                    if model is None:
                         data = {"subject": "model", "data": GANN_instance}
+                    else:
+                        predictions = pygad.nn.predict(last_layer=model, data_inputs=data_inputs)
+                        error = numpy.sum(numpy.abs(predictions - data_outputs))
+                        # In case a client sent a model to the server despite that the model error is 0.0. In this case, no need to make changes in the model.
+                        if error == 0:
+                            data = {"subject": "done", "data": None}
+                        else:
+                            data = {"subject": "model", "data": GANN_instance}
+
+                    try:
                         response = pickle.dumps(data)
                     except BaseException as e:
-                        print("Error Decoding the Client's Data: {msg}.\n".format(msg=e))
+                        print("Error Encoding the Message: {msg}.\n".format(msg=e))
                 elif subject == "model":
                     try:
                         GANN_instance = received_data["data"]
