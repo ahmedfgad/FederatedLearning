@@ -84,6 +84,22 @@ For Mac/Linux, use `python3` rather than `python`:
 python3 <client-script-name>.py
 ```
 
+# For More Information
+
+There are a number of resources to get started with federated learning .
+
+## Tutorial: [Introduction to Federated Learning](https://heartbeat.fritz.ai/introduction-to-federated-learning-40eb122754a2)
+
+This tutorial describes the pipeline of training a machine learning model using federated learning.
+
+[![](https://miro.medium.com/max/3240/1*6gRmlrDPp5J42HR3QWLYew.jpeg)](https://heartbeat.fritz.ai/introduction-to-federated-learning-40eb122754a2)
+
+## Tutorial: [Breaking Privacy in Federated Learning](https://heartbeat.fritz.ai/breaking-privacy-in-federated-learning-77fa08ccac9a)
+
+Even that federated learning does not disclose the private user data, there are some cases in which the privacy of federated learning can be broken.
+
+[![](https://miro.medium.com/max/3240/1*nZQg-E4a1wOvIH2AmkUUsQ.jpeg)](https://heartbeat.fritz.ai/breaking-privacy-in-federated-learning-77fa08ccac9a)
+
 # Contact Us
 
 - E-mail: [ahmed.f.gad@gmail.com](mailto:ahmed.f.gad@gmail.com)
