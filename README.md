@@ -68,6 +68,13 @@ Follow these steps to run the client:
 
 ![Fig03](https://user-images.githubusercontent.com/16560492/86206222-292e8c80-bb6c-11ea-9311-1ef4bb467188.jpg)
 
+# Download APKs
+
+The links for the APK files of both the server and the client Android apps are given below:
+
+- [Server](https://github.com/ahmedfgad/FederatedLearning/releases/download/0.1/FL-server-android.apk): https://github.com/ahmedfgad/FederatedLearning/releases/download/0.1/FL-server-android.apk
+- [Client](https://github.com/ahmedfgad/FederatedLearning/releases/download/0.1/FL-client-android.apk): https://github.com/ahmedfgad/FederatedLearning/releases/download/0.1/FL-client-android.apk
+
 # For More Information
 
 There are a number of resources to get started with federated learning and Kivy.
