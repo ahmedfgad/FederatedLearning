@@ -70,19 +70,31 @@ Follow these steps to run the client:
 
 # For More Information
 
-There are a number of resources to get started with Kivy.
+There are a number of resources to get started with federated learning and Kivy.
 
-## Book: [Building Android Apps in Python Using Kivy with Android Studio](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
+## Tutorial: [Introduction to Federated Learning](https://heartbeat.fritz.ai/introduction-to-federated-learning-40eb122754a2)
 
-To get started with Kivy app development and how to built Android apps out of the Kivy app, check the book titled [Building Android Apps in Python Using Kivy with Android Studio](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
+This tutorial describes the pipeline of training a machine learning model using federated learning.
 
-[![kivy-book](https://user-images.githubusercontent.com/16560492/86205093-575e9d00-bb69-11ea-82f7-23fef487ce3c.jpg)](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
+[![](https://miro.medium.com/max/3240/1*6gRmlrDPp5J42HR3QWLYew.jpeg)](https://heartbeat.fritz.ai/introduction-to-federated-learning-40eb122754a2)
+
+## Tutorial: [Breaking Privacy in Federated Learning](https://heartbeat.fritz.ai/breaking-privacy-in-federated-learning-77fa08ccac9a)
+
+Even that federated learning does not disclose the private user data, there are some cases in which the privacy of federated learning can be broken.
+
+[![](https://miro.medium.com/max/3240/1*nZQg-E4a1wOvIH2AmkUUsQ.jpeg)](https://heartbeat.fritz.ai/breaking-privacy-in-federated-learning-77fa08ccac9a)
 
 ## Tutorial: [Python for Android: Start Building Kivy Cross-Platform Applications](https://www.linkedin.com/pulse/python-android-start-building-kivy-cross-platform-applications-gad)
 
 This tutorial titled [Python for Android: Start Building Kivy Cross-Platform Applications](https://www.linkedin.com/pulse/python-android-start-building-kivy-cross-platform-applications-gad) covers the steps for creating an Android app out of the Kivy app.
 
 [![Kivy-Tutorial](https://user-images.githubusercontent.com/16560492/86205332-dfdd3d80-bb69-11ea-91fb-cb0143cb1e5e.png)](https://www.linkedin.com/pulse/python-android-start-building-kivy-cross-platform-applications-gad)
+
+## Book: [Building Android Apps in Python Using Kivy with Android Studio](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
+
+To get started with Kivy app development and how to built Android apps out of the Kivy app, check the book titled [Building Android Apps in Python Using Kivy with Android Studio](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
+
+[![kivy-book](https://user-images.githubusercontent.com/16560492/86205093-575e9d00-bb69-11ea-82f7-23fef487ce3c.jpg)](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
 
 # Contact Us
 
