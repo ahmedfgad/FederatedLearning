@@ -1,8 +1,8 @@
-# Federated Learning Demo in Python using Socket Programming
+# Federated Learning Demo in Python using Socket Programming: Part 4
 
-This is Part 4 of the federated learning (FL) demo project in Python using socket programming which builds and trains machine learning (ML) models using FL. The ML model is created using [PyGAD](https://pygad.readthedocs.io) which trains ML models using the genetic algorithm (GA). The problem used to demonstrate how things work is XOR.
+This is [Part 4](https://github.com/ahmedfgad/FederatedLearning/tree/master/TutorialProject/Part4) of the federated learning (FL) demo project in Python using socket programming. In this part, a GUI is created for the server and client apps built in [Part 3](https://github.com/ahmedfgad/FederatedLearning/tree/master/TutorialProject/Part3). 
 
-In Part 3, the user can interact with the server and the client apps using terminal. In Part 4, the major change is building a GUI for the client using [Kivy](https://kivy.org). This has a number of benefits.
+In [Part 3](https://github.com/ahmedfgad/FederatedLearning/tree/master/TutorialProject/Part3), the user can only interact with the server and the client apps using the terminal. In Part 4, the major change is building a GUI for the client using [Kivy](https://kivy.org). This has a number of benefits.
 
 - Easy way to manage the client application.
 - Ability to make the client available in mobile devices because Kivy supports deploying its desktop apps into mobile apps. As a result, machine learning models could be trained using federated learning by the massive private data available in mobile devices. 
@@ -14,7 +14,7 @@ Similar to building a GUI for the client app, a GUI can be built for the server 
 The project has the following files:
 
 - `server.py`: The server Kivy app. It creates a model that is trained on the clients' devices using FL.
-- `client1.py`: The client Kivy app which trains the model sent by the server using just 2 samples of the XOR problem.
+- `client1.py`: A client Kivy app which trains the model sent by the server using just 2 samples of the XOR problem.
 - `client2.py`: Another client Kivy app that trains the server's model using the other 2 samples in the XOR problem.
 - `pygad.py`: The implementation of the `pygad` module in the PyGAD library.
 - `nn.py`: The implementation of the `pygad.nn` module in the PyGAD library which builds artificial neural networks (ANNs).
