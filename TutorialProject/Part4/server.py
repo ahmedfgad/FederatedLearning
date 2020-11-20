@@ -163,8 +163,8 @@ class SocketThread(threading.Thread):
     def model_averaging(self, model, other_model):
         model_weights = nn.layers_weights(last_layer=model, initial=False)
         other_model_weights = nn.layers_weights(last_layer=other_model, initial=False)
-        
-        new_weights = (model_weights + other_model_weights)/2
+
+        new_weights = numpy.array(model_weights + other_model_weights)/2
 
         nn.update_layers_trained_weights(last_layer=model, final_weights=new_weights)
 
