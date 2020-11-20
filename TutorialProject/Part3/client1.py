@@ -27,6 +27,8 @@ def callback_generation(ga_instance):
     print("Generation = {generation}".format(generation=ga_instance.generations_completed))
     print("Fitness    = {fitness}".format(fitness=ga_instance.best_solution()[1]))
     print("Change     = {change}".format(change=ga_instance.best_solution()[1] - last_fitness))
+    
+    last_fitness = ga_instance.best_solution()[1]
 
 last_fitness = 0
 
@@ -87,7 +89,7 @@ def recv(soc, buffer_size=1024, recv_timeout=10):
             soc.settimeout(recv_timeout)
             received_data += soc.recv(buffer_size)
         except socket.timeout:
-            print("A socket.timeout exception occurred because the server did not send any data for {recv_timeout} seconds.".format(recv_timeout=recv_timeout))
+            print("A socket.timeout exception occurred because the server did not send any data for {recv_timeout} seconds. There may be an error or the model may be trained successfully.".format(recv_timeout=recv_timeout))
             return None, 0
         except BaseException as e:
             return None, 0
@@ -137,7 +139,7 @@ while True:
     if subject == "model":
         GANN_instance = received_data["data"]
     elif subject == "done":
-        print("Model is trained.")
+        print("The server said the model is trained successfully and no need for further updates its parameters.")
         break
     else:
         print("Unrecognized message type.")

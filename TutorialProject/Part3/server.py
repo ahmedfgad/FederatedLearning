@@ -81,8 +81,8 @@ class SocketThread(threading.Thread):
     def model_averaging(self, model, other_model):
         model_weights = pygad.nn.layers_weights(last_layer=model, initial=False)
         other_model_weights = pygad.nn.layers_weights(last_layer=other_model, initial=False)
-        
-        new_weights = (model_weights + other_model_weights)/2
+
+        new_weights = numpy.array(model_weights + other_model_weights)/2
 
         pygad.nn.update_layers_trained_weights(last_layer=model, final_weights=new_weights)
 
@@ -103,6 +103,7 @@ class SocketThread(threading.Thread):
                         # In case a client sent a model to the server despite that the model error is 0.0. In this case, no need to make changes in the model.
                         if error == 0:
                             data = {"subject": "done", "data": None}
+                            print("The client asked for the model but it was already trained successfully. There is no need to send the model to the client for retraining.")
                         else:
                             data = {"subject": "model", "data": GANN_instance}
 
@@ -127,6 +128,7 @@ class SocketThread(threading.Thread):
                             if error == 0:
                                 data = {"subject": "done", "data": None}
                                 response = pickle.dumps(data)
+                                print("The model is trained successfully and no need to send the model to the client for retraining.")
                                 return
 
                             self.model_averaging(model, best_model)
@@ -138,7 +140,7 @@ class SocketThread(threading.Thread):
                         print("Model Predictions: {predictions}".format(predictions=predictions))
 
                         error = numpy.sum(numpy.abs(predictions - data_outputs))
-                        print("Error = {error}".format(error=error))
+                        print("Error = {error}\n".format(error=error))
 
                         if error != 0:
                             data = {"subject": "model", "data": GANN_instance}
@@ -146,6 +148,7 @@ class SocketThread(threading.Thread):
                         else:
                             data = {"subject": "done", "data": None}
                             response = pickle.dumps(data)
+                            print("\n*****The Model is Trained Successfully*****\n\n")
 
                     except BaseException as e:
                         print("Error Decoding the Client's Data: {msg}.\n".format(msg=e))
@@ -169,12 +172,12 @@ class SocketThread(threading.Thread):
         while True:
             self.recv_start_time = time.time()
             time_struct = time.gmtime()
-            date_time = "Waiting to Receive Data Starting from {day}/{month}/{year} {hour}:{minute}:{second} GMT".format(year=time_struct.tm_year, month=time_struct.tm_mon, day=time_struct.tm_mday, hour=time_struct.tm_hour, minute=time_struct.tm_min, second=time_struct.tm_sec)
+            date_time = "\nWaiting to Receive Data from {client_info} Starting from {day}/{month}/{year} {hour}:{minute}:{second} GMT".format(year=time_struct.tm_year, month=time_struct.tm_mon, day=time_struct.tm_mday, hour=time_struct.tm_hour, minute=time_struct.tm_min, second=time_struct.tm_sec, client_info=self.client_info)
             print(date_time)
             received_data, status = self.recv()
             if status == 0:
                 self.connection.close()
-                print("Connection Closed with {client_info} either due to inactivity for {recv_timeout} seconds or due to an error.".format(client_info=self.client_info, recv_timeout=self.recv_timeout), end="\n\n")
+                print("\nConnection Closed with {client_info} either due to inactivity for {recv_timeout} seconds or due to an error.".format(client_info=self.client_info, recv_timeout=self.recv_timeout), end="\n\n")
                 break
 
             # print(received_data)
@@ -196,7 +199,7 @@ all_data = b""
 while True:
     try:
         connection, client_info = soc.accept()
-        print("New Connection from {client_info}.".format(client_info=client_info))
+        print("\nNew Connection from {client_info}.".format(client_info=client_info))
         socket_thread = SocketThread(connection=connection,
                                      client_info=client_info, 
                                      buffer_size=1024,
