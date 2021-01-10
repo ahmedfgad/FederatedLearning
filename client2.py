@@ -180,6 +180,9 @@ class RecvThread(threading.Thread):
 
                 try:
                     pickle.loads(received_data)
+                    self.kivy_app.label.text = "All data is received from the server."
+                    print("All data is received from the server.")
+
                     # If the previous pickle.loads() statement is passed, this means all the data is received.
                     # Thus, no need to continue the loop and a break statement should be excuted.
                     break
