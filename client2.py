@@ -156,12 +156,12 @@ def prepare_GA(GANN_instance):
     return ga_instance
 
 # Preparing the NumPy array of the inputs.
-data_inputs = numpy.array([[1, 0],
-                           [1, 1]])
+data_inputs = numpy.array([[1, 1],
+                           [1, 0]])
 
 # Preparing the NumPy array of the outputs.
-data_outputs = numpy.array([1, 
-                            0])
+data_outputs = numpy.array([0, 
+                            1])
 
 class RecvThread(threading.Thread):
 
@@ -173,10 +173,20 @@ class RecvThread(threading.Thread):
 
     def recv(self):
         received_data = b""
-        while str(received_data)[-2] != '.':
+        while True: # str(received_data)[-2] != '.':
             try:
                 self.kivy_app.soc.settimeout(self.recv_timeout)
                 received_data += self.kivy_app.soc.recv(self.buffer_size)
+
+                try:
+                    pickle.loads(received_data)
+                    # If the previous pickle.loads() statement is passed, this means all the data is received.
+                    # Thus, no need to continue the loop and a break statement should be excuted.
+                    break
+                except BaseException:
+                    # An exception is expected when the data is not 100% received.
+                    pass
+
             except socket.timeout:
                 print("A socket.timeout exception occurred because the server did not send any data for {recv_timeout} seconds.".format(recv_timeout=self.recv_timeout))
                 self.kivy_app.label.text = "{recv_timeout} Seconds of Inactivity. socket.timeout Exception Occurred".format(recv_timeout=self.recv_timeout)
@@ -189,7 +199,7 @@ class RecvThread(threading.Thread):
         try:
             received_data = pickle.loads(received_data)
         except BaseException as e:
-            print("Error Decoding the Client's Data: {msg}.\n".format(msg=e))
+            print("Error Decoding the Data: {msg}.\n".format(msg=e))
             self.kivy_app.label.text = "Error Decoding the Client's Data"
             return None, 0
     
