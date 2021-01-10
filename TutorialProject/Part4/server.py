@@ -122,6 +122,7 @@ class SocketThread(threading.Thread):
         self.kivy_app = kivy_app
 
     def recv(self):
+        all_data_received_flag = False
         received_data = b""
         while True:
             try:
@@ -129,13 +130,22 @@ class SocketThread(threading.Thread):
                 data = self.connection.recv(self.buffer_size)
                 received_data += data
 
+                try:
+                    pickle.loads(received_data)
+                    # If the previous pickle.loads() statement is passed, this means all the data is received.
+                    # Thus, no need to continue the loop. The flag all_data_received_flag is set to True to signal all data is received.
+                    all_data_received_flag = True
+                except BaseException:
+                    # An exception is expected when the data is not 100% received.
+                    pass
+
                 if data == b'': # Nothing received from the client.
                     received_data = b""
                     # If still nothing received for a number of seconds specified by the recv_timeout attribute, return with status 0 to close the connection.
                     if (time.time() - self.recv_start_time) > self.recv_timeout:
                         return None, 0 # 0 means the connection is no longer active and it should be closed.
 
-                elif str(data)[-2] == '.':
+                elif all_data_received_flag:
                     print("All data ({data_len} bytes) Received from {client_info}.".format(client_info=self.client_info, data_len=len(received_data)))
                     self.kivy_app.label.text = "All data ({data_len} bytes) Received from {client_info}.".format(client_info=self.client_info, data_len=len(received_data))
 
