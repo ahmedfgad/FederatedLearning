@@ -16,13 +16,24 @@ The project has the following files:
 - `server.py`: The server Kivy app. It creates a model that is trained on the clients' devices using FL.
 - `client1.py`: A client Kivy app which trains the model sent by the server using just 2 samples of the XOR problem.
 - `client2.py`: Another client Kivy app that trains the server's model using the other 2 samples in the XOR problem.
-- `pygad.py`: The implementation of the `pygad` module in the PyGAD library.
-- `nn.py`: The implementation of the `pygad.nn` module in the PyGAD library which builds artificial neural networks (ANNs).
-- `gann.py`: The implementation of the `pygad.gann` module in the PyGAD library which trains ANNs using GA.
+
+# Install PyGAD
+
+Before running the project, the [PyGAD](https://pygad.readthedocs.io/) library must be installed.
+
+```
+pip install pygad
+```
+
+For Linux and Mac, use `pip3`:
+
+```
+pip3 install pygad
+```
 
 # Running the Project
 
-Start the project by running the `server.py` file. The GUI of the server Kivy app is shown below. Follow these steps to make sure the server is running and listening for connections.
+Start the project by running the [`server.py`](https://github.com/ahmedfgad/FederatedLearning/blob/master/TutorialProject/Part4/server.py) file. The GUI of the server Kivy app is shown below. Follow these steps to make sure the server is running and listening for connections.
 
 * Click on the **Create Socket** button to create a socket. 
 
@@ -34,7 +45,7 @@ Start the project by running the `server.py` file. The GUI of the server Kivy ap
 
 After running the server, next is to run one or more clients. The project creates 2 clients but you can add more. The only expected change among the different clients is the data being used for training the model sent by the server.
 
-For `client1.py`, here is the training data (2 samples of the XOR problem):
+For [`client1.py`](https://github.com/ahmedfgad/FederatedLearning/blob/master/TutorialProject/Part4/client1.py), here is the training data (2 samples of the XOR problem):
 
 ```python
 # Preparing the NumPy array of the inputs.
@@ -46,7 +57,7 @@ data_outputs = numpy.array([1,
                             0])
 ```
 
-Here is the training data (other 2 samples of the XOR problem) for the other client (`client2.py`):
+Here is the training data (other 2 samples of the XOR problem) for the other client ([`client2.py`](https://github.com/ahmedfgad/FederatedLearning/blob/master/TutorialProject/Part4/client2.py)):
 
 ```python
 # Preparing the NumPy array of the inputs.
