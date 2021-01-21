@@ -151,7 +151,7 @@ def prepare_GA(GANN_instance):
                            crossover_type=crossover_type,
                            mutation_type=mutation_type,
                            keep_parents=keep_parents,
-                           callback_generation=callback_generation)
+                           on_generation=callback_generation)
 
     return ga_instance
 
