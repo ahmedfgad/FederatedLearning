@@ -4,8 +4,8 @@ import threading
 import time
 import numpy
 
-import nn
-import gann
+import pygad.nn
+import pygad.gann
 
 import kivy.app
 import kivy.uix.button
@@ -104,7 +104,7 @@ num_classes = 2
 num_inputs = 2
 
 num_solutions = 6
-GANN_instance = gann.GANN(num_solutions=num_solutions,
+GANN_instance = pygad.gann.GANN(num_solutions=num_solutions,
                                 num_neurons_input=num_inputs,
                                 num_neurons_hidden_layers=[2],
                                 num_neurons_output=num_classes,
@@ -171,12 +171,12 @@ class SocketThread(threading.Thread):
                 return None, 0
 
     def model_averaging(self, model, other_model):
-        model_weights = nn.layers_weights(last_layer=model, initial=False)
-        other_model_weights = nn.layers_weights(last_layer=other_model, initial=False)
+        model_weights = pygad.nn.layers_weights(last_layer=model, initial=False)
+        other_model_weights = pygad.nn.layers_weights(last_layer=other_model, initial=False)
 
         new_weights = numpy.array(model_weights + other_model_weights)/2
 
-        nn.update_layers_trained_weights(last_layer=model, final_weights=new_weights)
+        pygad.nn.update_layers_trained_weights(last_layer=model, final_weights=new_weights)
 
     def reply(self, received_data):
         global GANN_instance, data_inputs, data_outputs, model
@@ -192,7 +192,7 @@ class SocketThread(threading.Thread):
                     if model is None:
                         data = {"subject": "model", "data": GANN_instance}
                     else:
-                        predictions = nn.predict(last_layer=model, data_inputs=data_inputs)
+                        predictions = pygad.nn.predict(last_layer=model, data_inputs=data_inputs)
                         error = numpy.sum(numpy.abs(predictions - data_outputs))
                         # In case a client sent a model to the server despite that the model error is 0.0. In this case, no need to make changes in the model.
                         if error == 0:
@@ -214,7 +214,7 @@ class SocketThread(threading.Thread):
                         if model is None:
                             model = best_model
                         else:
-                            predictions = nn.predict(last_layer=model, data_inputs=data_inputs)
+                            predictions = pygad.nn.predict(last_layer=model, data_inputs=data_inputs)
     
                             error = numpy.sum(numpy.abs(predictions - data_outputs))
     
@@ -229,7 +229,7 @@ class SocketThread(threading.Thread):
                         # print(best_model.trained_weights)
                         # print(model.trained_weights)
 
-                        predictions = nn.predict(last_layer=model, data_inputs=data_inputs)
+                        predictions = pygad.nn.predict(last_layer=model, data_inputs=data_inputs)
                         print("Model Predictions: {predictions}".format(predictions=predictions))
 
                         error = numpy.sum(numpy.abs(predictions - data_outputs))
