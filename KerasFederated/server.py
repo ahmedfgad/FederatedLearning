@@ -110,9 +110,10 @@ output_layer = tensorflow.keras.layers.Dense(num_classes, activation="softmax")(
 
 model = tensorflow.keras.Model(inputs=input_layer, outputs=output_layer)
 
-num_solutions = 6
+num_solutions = 10
 # Create an instance of the pygad.kerasga.KerasGA class to build the initial population.
-keras_ga = pygad.kerasga.KerasGA(model=model,num_solutions=10)
+keras_ga = pygad.kerasga.KerasGA(model=model,
+                                 num_solutions=num_solutions)
 
 class SocketThread(threading.Thread):
 
@@ -129,7 +130,6 @@ class SocketThread(threading.Thread):
         received_data = b""
         while True:
             try:
-                
                 data = self.connection.recv(self.buffer_size)
                 received_data += data
 
@@ -194,13 +194,14 @@ class SocketThread(threading.Thread):
         if (type(received_data) is dict):
             if (("data" in received_data.keys()) and ("subject" in received_data.keys())):
                 subject = received_data["subject"]
+                msg_model = received_data["data"]
                 print("Client's Message Subject is {subject}.".format(subject=subject))
                 self.kivy_app.label.text = "Client's Message Subject is {subject}".format(subject=subject)
 
                 print("Replying to the Client.")
                 self.kivy_app.label.text = "Replying to the Client"
                 if subject == "echo":
-                    if model is None:
+                    if msg_model is None:
                         data_dict = {"population_weights": keras_ga.population_weights,
                                      "model_json": model.to_json(),
                                      "num_solutions": keras_ga.num_solutions}
@@ -219,7 +220,6 @@ class SocketThread(threading.Thread):
                                          "model_json": model.to_json(),
                                          "num_solutions": keras_ga.num_solutions}
                             data = {"subject": "model", "data": data_dict}
-
                     try:
                         response = pickle.dumps(data)
                     except BaseException as e:
@@ -334,7 +334,7 @@ class ListenThread(threading.Thread):
                 socket_thread.start()
             except BaseException as e:
                 self.kivy_app.soc.close()
-                print(e)
+                print("Error in the run() of the ListenThread class: {msg}.\n".format(msg=e))
                 self.kivy_app.label.text = "Socket is No Longer Accepting Connections"
                 self.kivy_app.create_socket_btn.disabled = False
                 self.kivy_app.close_socket_btn.disabled = True
