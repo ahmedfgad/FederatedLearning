@@ -14,7 +14,7 @@ import kivy.uix.textinput
 import kivy.uix.boxlayout
 
 class ServerApp(kivy.app.App):
-    
+
     def __init__(self):
         super().__init__()
 
@@ -126,7 +126,6 @@ class SocketThread(threading.Thread):
         received_data = b""
         while True:
             try:
-                
                 data = self.connection.recv(self.buffer_size)
                 received_data += data
 
@@ -160,7 +159,6 @@ class SocketThread(threading.Thread):
                             print("Error Decoding the Client's Data: {msg}.\n".format(msg=e))
                             self.kivy_app.label.text = "Error Decoding the Client's Data"
                             return None, 0
-
                 else:
                     # In case data are received from the client, update the recv_start_time to the current time to reset the timeout counter.
                     self.recv_start_time = time.time()
@@ -199,7 +197,6 @@ class SocketThread(threading.Thread):
                             data = {"subject": "done", "data": None}
                         else:
                             data = {"subject": "model", "data": GANN_instance}
-
                     try:
                         response = pickle.dumps(data)
                     except BaseException as e:
@@ -301,7 +298,7 @@ class ListenThread(threading.Thread):
                 socket_thread.start()
             except BaseException as e:
                 self.kivy_app.soc.close()
-                print(e)
+                print("Error in the run() of the ListenThread class: {msg}.\n".format(msg=e))
                 self.kivy_app.label.text = "Socket is No Longer Accepting Connections"
                 self.kivy_app.create_socket_btn.disabled = False
                 self.kivy_app.close_socket_btn.disabled = True
