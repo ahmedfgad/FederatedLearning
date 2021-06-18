@@ -114,6 +114,21 @@ To get started with Kivy app development and how to built Android apps out of th
 
 [![kivy-book](https://user-images.githubusercontent.com/16560492/86205093-575e9d00-bb69-11ea-82f7-23fef487ce3c.jpg)](https://www.amazon.com/Building-Android-Python-Using-Studio/dp/1484250303)
 
+# Citing PyGAD - Bibtex Formatted Citation
+
+If you used PyGAD, please consider adding a citation to the following paper about PyGAD:
+
+```
+@misc{gad2021pygad,
+      title={PyGAD: An Intuitive Genetic Algorithm Python Library}, 
+      author={Ahmed Fawzy Gad},
+      year={2021},
+      eprint={2106.06158},
+      archivePrefix={arXiv},
+      primaryClass={cs.NE}
+}
+```
+
 # Contact Us
 
 - E-mail: [ahmed.f.gad@gmail.com](mailto:ahmed.f.gad@gmail.com)
