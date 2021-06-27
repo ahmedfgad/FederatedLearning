@@ -20,12 +20,6 @@ Before running the project, the [PyGAD](https://pygad.readthedocs.io) library mu
 pip install pygad
 ```
 
-For Linux and Mac, use `pip3`:
-
-```
-pip3 install pygad
-```
-
 # Running the Project
 
 Start the project by running the [`server.py`](https://github.com/ahmedfgad/FederatedLearning/blob/master/KerasFederated/server.py) file. The GUI of the server Kivy app is shown below. Follow these steps to make sure the server is running and listening for connections.
