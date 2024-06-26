@@ -1,6 +1,6 @@
 # Federated Learning Demo in Python using Socket Programming
 
-This is a demo project for applying the concepts of federated learning (FL) in Python using socket programming by building and training machine learning (ML) models using FL. The ML model is created using [PyGAD](https://pygad.readthedocs.io) which trains ML models using the genetic algorithm (GA). The problem used to demonstrate how things work is XOR.
+This is a demo project for applying the concepts of federated learning (FL) in Python using socket programming by building and training machine learning (ML) models using FL. The ML model is trained using [PyGAD](https://pygad.readthedocs.io) which trains ML models using the genetic algorithm (GA). The problem used to demonstrate how things work is XOR.
 
 The project builds GUI for the server and the client using [Kivy](https://kivy.org). This has a number of benefits.
 
